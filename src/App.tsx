@@ -1,10 +1,15 @@
 import './App.css';
-
-import LoginAdmin from './Admin/features/Login/Login';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './route/Routes';
+import { UserProvider } from './context/UserContext';
 
 function App() {
   return (
-    <LoginAdmin></LoginAdmin>
+    <Router>
+      <UserProvider>
+        <Routes></Routes>
+      </UserProvider>
+    </Router>
   );
 }
 

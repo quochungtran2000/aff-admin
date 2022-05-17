@@ -1,15 +1,63 @@
-import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
-export default function LoginAdmin() {
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { authApi } from '../api';
+import { LoginVars } from '../api/authApi';
+import notification from '../utils/notification';
+// import useUserStore, { setUser } from '../store/user';
+import { Redirect, useHistory } from 'react-router';
+import { useUser } from '../context/UserContext';
+export default function LoginPage() {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [showPassword, setshowPassword] = useState<Boolean>(false);
+  const history = useHistory();
+
+  const { setUser, user } = useUser();
+
+  if (user) {
+    history.push({ pathname: '/' });
+  }
+
+  const handleChangeUserName = (e: any) => {
+    e.preventDefault();
+    setUsername(e.target.value);
+  };
+
+  const handleChangePassword = (e: any) => {
+    e.preventDefault();
+    setPassword(e.target.value);
+  };
+
+  console.log({ username, password });
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    if (!username || !password) return notification('error', 'Vui lòng nhập đủ thông tin đăng nhập');
+
+    const data: LoginVars = {
+      username,
+      password,
+    };
+
+    authApi
+      .login(data)
+      .then(({ data }) => {
+        const { token, user } = data;
+        localStorage.setItem('token', `Bearer ${token}`);
+        setUser(user);
+      })
+      .catch((err: any) => {
+        console.log(err);
+        notification('error', err.response?.data?.message[0]);
+      });
+  };
   return (
     <div className="lg:flex">
       <div className="lg:w-1/2 xl:max-w-screen-sm">
         <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
           <div className="cursor-pointer flex items-center">
-            <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">
-              SSG ADMIN
-            </div>
+            <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">SSG ADMIN</div>
           </div>
         </div>
         <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
@@ -17,22 +65,20 @@ export default function LoginAdmin() {
             Đăng Nhập
           </h2>
           <div className="mt-12">
-            <form>
+            <form onSubmit={onSubmit}>
               <div>
-                <div className="text-sm font-bold text-gray-700 tracking-wide">
-                  Email Address
-                </div>
+                <div className="text-sm font-bold text-gray-700 tracking-wide">Tên đăng nhập</div>
                 <input
                   className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                  type="email"
+                  type="text"
                   placeholder="mike@gmail.com"
+                  value={username}
+                  onChange={handleChangeUserName}
                 />
               </div>
               <div className="mt-8">
                 <div className="flex justify-between items-center">
-                  <div className="text-sm font-bold text-gray-700 tracking-wide">
-                    Password
-                  </div>
+                  <div className="text-sm font-bold text-gray-700 tracking-wide">Mật khẩu</div>
 
                   <div>
                     <a className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer">
@@ -43,19 +89,21 @@ export default function LoginAdmin() {
                 <div className="flex justify-center items-center">
                   <input
                     className="group w-full text-lg py-2 -500 border-b border-gray-300 focus:outline-none  focus:border-indigo-800"
-                    type={`${!showPassword ? "password" : ""}`}
+                    type={`${!showPassword ? 'password' : ''}`}
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={handleChangePassword}
                   />
                   <EyeInvisibleOutlined
                     className="text-3xl font-extrabold cursor-pointer transition-all duration-500"
-                    style={{ display: `${!showPassword ? "block" : "none"}` }}
+                    style={{ display: `${!showPassword ? 'block' : 'none'}` }}
                     onClick={() => {
                       setshowPassword(!showPassword);
                     }}
                   />
                   <EyeOutlined
                     className="text-3xl font-extrabold cursor-pointer duration-500"
-                    style={{ display: `${!showPassword ? "none" : "block"}` }}
+                    style={{ display: `${!showPassword ? 'none' : 'block'}` }}
                     onClick={() => {
                       setshowPassword(!showPassword);
                     }}
@@ -63,7 +111,10 @@ export default function LoginAdmin() {
                 </div>
               </div>
               <div className="mt-10">
-                <button className="bg-indigo-500 text-sm text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg">
+                <button
+                  type="submit"
+                  className="bg-indigo-500 text-sm text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg"
+                >
                   Log In
                 </button>
               </div>
@@ -88,24 +139,15 @@ export default function LoginAdmin() {
           >
             <title>Login</title>
             <rect y="17.06342" width="444" height="657" fill="#535461" />
-            <polygon
-              points="323 691.063 0 674.063 0 17.063 323 0.063 323 691.063"
-              fill="#7f9cf5"
-            />
+            <polygon points="323 691.063 0 674.063 0 17.063 323 0.063 323 691.063" fill="#7f9cf5" />
             <circle cx="296" cy="377.06342" r="4" fill="#535461" />
             <polygon
               points="296 377.66 298.773 382.463 301.545 387.265 296 387.265 290.455 387.265 293.227 382.463 296 377.66"
               fill="#535461"
             />
-            <polygon
-              points="337 691.063 317.217 691 318 0.063 337 0.063 337 691.063"
-              fill="#7f9cf5"
-            />
+            <polygon points="337 691.063 317.217 691 318 0.063 337 0.063 337 691.063" fill="#7f9cf5" />
             <g opacity="0.1">
-              <polygon
-                points="337.217 691 317.217 691 318.217 0 337.217 0 337.217 691"
-                fill="#fff"
-              />
+              <polygon points="337.217 691 317.217 691 318.217 0 337.217 0 337.217 691" fill="#fff" />
             </g>
             <circle cx="296" cy="348.06342" r="13" opacity="0.1" />
             <circle cx="296" cy="346.06342" r="13" fill="#535461" />
@@ -164,13 +206,7 @@ export default function LoginAdmin() {
               stroke-width="2"
               opacity="0.1"
             />
-            <ellipse
-              cx="463.21721"
-              cy="95.32341"
-              rx="39.5"
-              ry="37"
-              fill="#2f2e41"
-            />
+            <ellipse cx="463.21721" cy="95.32341" rx="39.5" ry="37" fill="#2f2e41" />
             <path
               d="M683.8586,425.93948l-10,14s-48,10-30,25,44-14,44-14l14-18Z"
               transform="translate(-335.6414 -100.11607)"
