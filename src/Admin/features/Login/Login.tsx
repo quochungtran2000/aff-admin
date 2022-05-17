@@ -8,16 +8,13 @@ export default function LoginAdmin() {
         <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
           <div className="cursor-pointer flex items-center">
             <div className="text-2xl text-indigo-800 tracking-wide ml-2 font-semibold">
-              blockify
+              SSG ADMIN
             </div>
           </div>
         </div>
         <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
-          <h2
-            className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
-                    xl:text-bold"
-          >
-            Log in
+          <h2 className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl xl:text-bold">
+            Đăng Nhập
           </h2>
           <div className="mt-12">
             <form>
@@ -38,40 +35,45 @@ export default function LoginAdmin() {
                   </div>
 
                   <div>
-                    <a
-                      className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
-                                        cursor-pointer"
-                    >
-                      Forgot Password?
+                    <a className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800 cursor-pointer">
+                      Quên mật khẩu?
                     </a>
                   </div>
                 </div>
-                <div className=" flex justify-center items-center   ">
+                <div className="flex justify-center items-center">
                   <input
                     className="group w-full text-lg py-2 -500 border-b border-gray-300 focus:outline-none  focus:border-indigo-800"
-                    type={`${!showPassword ? "password" : "" }`}
+                    type={`${!showPassword ? "password" : ""}`}
                     placeholder="Enter your password"
                   />
-                  <EyeInvisibleOutlined className="text-3xl font-extrabold cursor-pointer transition-all duration-500" style={{display: `${!showPassword ? "block" : "none"}`}} onClick={() => { setshowPassword(!showPassword) }} />
-                  <EyeOutlined className="text-3xl font-extrabold cursor-pointer duration-500" style={{display: `${!showPassword ? "none" : "block"}`}} onClick={() => { setshowPassword(!showPassword) }}></EyeOutlined>
+                  <EyeInvisibleOutlined
+                    className="text-3xl font-extrabold cursor-pointer transition-all duration-500"
+                    style={{ display: `${!showPassword ? "block" : "none"}` }}
+                    onClick={() => {
+                      setshowPassword(!showPassword);
+                    }}
+                  />
+                  <EyeOutlined
+                    className="text-3xl font-extrabold cursor-pointer duration-500"
+                    style={{ display: `${!showPassword ? "none" : "block"}` }}
+                    onClick={() => {
+                      setshowPassword(!showPassword);
+                    }}
+                  ></EyeOutlined>
                 </div>
               </div>
               <div className="mt-10">
-                <button
-                  className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide
-                                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600
-                                shadow-lg"
-                >
+                <button className="bg-indigo-500 text-sm text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg">
                   Log In
                 </button>
               </div>
             </form>
-            <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
+            {/* <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
               Don't have an account ?{" "}
               <a className="cursor-pointer text-indigo-600 hover:text-indigo-800">
                 Sign up
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
