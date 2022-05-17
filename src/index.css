@@ -18,7 +18,7 @@ body {
   font-size: 100%;
 }
 
-/* @layer utilities {
+ @layer utilities {
   h1 {
     font-weight: 700;
     font-size: 68px;
@@ -122,11 +122,11 @@ body,
   color: '#003056';
 }
 
-.ant-table-cell {
+/* .ant-table-cell {
   text-align: center;
-}
+} */
 
-.customTable .ant-table-thead .ant-table-cell {
+/* .customTable .ant-table-thead .ant-table-cell {
   font-size: 14px;
   line-height: 18px;
   font-weight: 400;
@@ -134,7 +134,7 @@ body,
   border: none;
   background-color: #eff3f8;
   text-align: center;
-}
+} */
 
 .customTable .ant-table-thead .ant-table-cell::before {
   width: 0 !important;
@@ -150,4 +150,4 @@ body,
 
 .anticon svg {
   vertical-align: unset !important
-} */
+} 

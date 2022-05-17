@@ -1,9 +1,9 @@
 import MainLayout from '../../components/layout/MainLayout';
 
-export default function CrawlCategoryPage() {
+export default function EcommerceCategoryPage() {
   return (
     <MainLayout>
-      <div className="text-sm">CrawlCategoryPage</div>
+      <div className="text-sm">EcommerceCategoryPage</div>
     </MainLayout>
   );
 }

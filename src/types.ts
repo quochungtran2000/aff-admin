@@ -11,3 +11,12 @@ export type User = {
   phoneNumber: string;
   role: string;
 };
+
+export type EcommerceCategory = {
+  id: string;
+  title: string;
+  slug: string;
+  active: boolean;
+  crawl: boolean;
+  subCategory?: EcommerceCategory[];
+};

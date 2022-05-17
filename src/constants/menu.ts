@@ -26,9 +26,21 @@ const sidebarMenu = [
         title: 'Danh Mục Sản phẩm',
         key: '/category',
       },
+      // {
+      //   title: 'Danh Mục Thu Thập',
+      //   key: '/ecommerce-category',
+      // },
       {
-        title: 'Danh Mục Thu Thập',
-        key: '/crawl-category',
+        title: 'Danh Mục Tiki',
+        key: '/tiki-category',
+      },
+      {
+        title: 'Danh Mục Lazada',
+        key: '/lazada-category',
+      },
+      {
+        title: 'Danh Mục Shopee',
+        key: '/shopee-category',
       },
     ],
   },
