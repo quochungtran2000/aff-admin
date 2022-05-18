@@ -3,12 +3,7 @@ import LoginPage from '../pages/Login';
 import { ProductTemplatePage } from '../pages/ProductTemplate';
 import { CustomerPage } from '../pages/Customer';
 import { StaffPage } from '../pages/Staff';
-import {
-  EcommerceCategoryPage,
-  LazadaCategoryPage,
-  ShopeeCategoryPage,
-  TikiCategoryPage,
-} from '../pages/EcommerceCategory';
+import { LazadaCategoryPage, ShopeeCategoryPage, TikiCategoryPage } from '../pages/EcommerceCategory';
 import { CategoryPage } from '../pages/Category';
 import { CrawlProductPage } from '../pages/CrawlProduct';
 import { ComparePostPage } from '../pages/ComparePost';
@@ -26,7 +21,7 @@ const routes: CustomRoute[] = [
   { path: '/', component: HomePage, isPublic: false },
   { path: '/login', component: LoginPage, isPublic: true },
   { path: '/category', component: CategoryPage, isPublic: false },
-  { path: '/ecommerce-category', component: EcommerceCategoryPage, isPublic: false },
+  // { path: '/ecommerce-category', component: EcommerceCategoryPage, isPublic: false },
   // Category
   { path: '/tiki-category', component: TikiCategoryPage, isPublic: false },
   { path: '/shopee-category', component: ShopeeCategoryPage, isPublic: false },

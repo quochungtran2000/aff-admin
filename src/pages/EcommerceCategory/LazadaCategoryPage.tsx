@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import categoryApi from '../../api/categoryApi';
 import MainLayout from '../../components/layout/MainLayout';
 import { EcommerceCategory } from '../../types';
@@ -9,26 +9,25 @@ export default function LazadaCategoryPage() {
   const [data, setData] = useState<EcommerceCategory[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-
-    const fetchData = async () => {
-      try {
-        const { data } = await categoryApi.getCrawlCategory({ merchant: 'lazada' });
-        setData(data);
-      } catch (error) {
-        logError('Get Lazada Category', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+  const refetch = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await categoryApi.getCrawlCategory({ merchant: 'lazada' });
+      setData(data);
+    } catch (error) {
+      logError('Get Lazada Category', error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <MainLayout>
-      <TableEcommerceCategory isLoading={isLoading} merchant="lazada" dataSource={data} />
+      <TableEcommerceCategory isLoading={isLoading} merchant="lazada" dataSource={data} refetch={refetch} />
     </MainLayout>
   );
 }

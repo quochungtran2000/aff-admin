@@ -3,11 +3,14 @@ import { Button, Table } from 'antd';
 import { CancelIcon, CheckIcon } from '../../../assets/svg';
 import { useState } from 'react';
 import UpdateEcommerceCategoryModal from './UpdateEcommerceCategoryModal';
+import categoryApi from '../../../api/categoryApi';
+import notification from '../../../utils/notification';
 
 type Props = {
   merchant: 'tiki' | 'lazada' | 'shopee';
   dataSource: EcommerceCategory[];
   isLoading: boolean;
+  refetch: () => void;
 };
 
 export default function TableEcommerceCategory(props: Props) {
@@ -15,12 +18,26 @@ export default function TableEcommerceCategory(props: Props) {
   const [currentCategory, setCurrentcategory] = useState<EcommerceCategory | undefined>(undefined);
 
   const onCancel = () => setIsVisible(false);
-  const { merchant, dataSource, isLoading } = props;
+  const { merchant, dataSource, isLoading, refetch } = props;
 
   const onClick = (data: EcommerceCategory) => {
     if (!data) return;
     setCurrentcategory(data);
     setIsVisible(true);
+  };
+
+  const onSubmit = (data: EcommerceCategory) => {
+    console.log({ data });
+    categoryApi
+      .updateCrawlCategory(data)
+      .then(() => {
+        notification('success', 'Cập nhật danh mục thành công!.');
+        refetch();
+        onCancel();
+      })
+      .catch((error: any) => {
+        notification('error', error?.response?.data?.message?.[0]);
+      });
   };
   const columns = [
     {
@@ -119,7 +136,12 @@ export default function TableEcommerceCategory(props: Props) {
         columns={columns}
         dataSource={dataSource}
       />
-      <UpdateEcommerceCategoryModal isModalVisible={isVisible} onCancel={onCancel} data={currentCategory} />
+      <UpdateEcommerceCategoryModal
+        isModalVisible={isVisible}
+        onCancel={onCancel}
+        data={currentCategory}
+        onFinish={onSubmit}
+      />
     </>
   );
 }

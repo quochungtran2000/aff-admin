@@ -6,6 +6,7 @@ interface IProps {
   isModalVisible: boolean;
   onCancel: () => void;
   data?: EcommerceCategory;
+  onFinish: (data: EcommerceCategory) => void;
 }
 
 const formLayout = {
@@ -14,7 +15,7 @@ const formLayout = {
 };
 
 export default function UpdateEcommerceCategoryModal(props: IProps): JSX.Element {
-  const { isModalVisible, onCancel, data } = props;
+  const { isModalVisible, onCancel, data, onFinish } = props;
 
   const [form] = Form.useForm();
 
@@ -28,7 +29,7 @@ export default function UpdateEcommerceCategoryModal(props: IProps): JSX.Element
         form={form}
         initialValues={data}
         name="update ecommerce category"
-        // onFinish={mutationUser}
+        onFinish={onFinish}
         className="bg-white p-2 gap-4 lg:w-90 md:w-90 sm:w-100"
         {...formLayout}
       >

@@ -46,6 +46,7 @@ export default function LoginPage() {
         const { token, user } = data;
         localStorage.setItem('token', `Bearer ${token}`);
         setUser(user);
+        notification('success', `Xin chào ${user?.fullname}!.`);
       })
       .catch((err: any) => {
         console.log(err);
