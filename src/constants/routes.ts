@@ -1,19 +1,22 @@
-import HomePage from '../pages/Home';
-import LoginPage from '../pages/Login';
-import { ProductTemplatePage } from '../pages/ProductTemplate';
-import { CustomerPage } from '../pages/Customer';
-import { StaffPage } from '../pages/Staff';
 import {
   EcommerceCategoryPage,
   LazadaCategoryPage,
   ShopeeCategoryPage,
   TikiCategoryPage,
 } from '../pages/EcommerceCategory';
-import { CategoryPage } from '../pages/Category';
-import { CrawlProductPage } from '../pages/CrawlProduct';
-import { ComparePostPage } from '../pages/ComparePost';
-import { TopProductPostPage } from '../pages/TopProductPost';
+
 import { AffiliateLinkPage } from '../pages/AffiliateLink';
+import { CategoryPage } from '../pages/Category';
+import { ComparePostPage } from '../pages/ComparePost';
+import { CrawlProductPage } from '../pages/CrawlProduct';
+import { CustomerPage } from '../pages/Customer';
+import HomePage from '../pages/Home';
+import LoginPage from '../pages/Login';
+import { ProductTemplatePage } from '../pages/ProductTemplate';
+import { Shopping } from '../pages/Shopping';
+import { StaffPage } from '../pages/Staff';
+import { TopProductPostPage } from '../pages/TopProductPost';
+
 // import { TikiCategoryPage } from '../pages/TikiCategory';
 
 export type CustomRoute = {
@@ -39,6 +42,8 @@ const routes: CustomRoute[] = [
   { path: '/compare-post', component: ComparePostPage, isPublic: false },
   { path: '/top-product-post', component: TopProductPostPage, isPublic: false },
   { path: '/aff-link', component: AffiliateLinkPage, isPublic: false },
+  //Shopping
+  { path: '/shopping', component: Shopping, isPublic: false },
 ];
 
 export default routes;
