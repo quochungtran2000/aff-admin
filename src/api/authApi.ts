@@ -30,7 +30,7 @@ const authApi = {
     return axiosClient.post(url, data);
   },
   me: (): Promise<AxiosResponse<User>> => {
-    const url = `/auth/me`;
+    const url = `/auth/profile`;
     return axiosClient.get(url);
   },
 };

@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input, Modal, TreeSelect } from 'antd';
+import { Button, Form, Input, Modal, TreeSelect } from 'antd';
 import { useCallback, useEffect, useState } from 'react';
 import categoryApi from '../../../api/categoryApi';
 import { EcommerceCategory } from '../../../types';

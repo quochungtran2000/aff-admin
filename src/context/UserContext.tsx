@@ -31,12 +31,6 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   });
   const [isLoading, SetIsLoading] = useState<boolean>(false);
 
-  console.log(`userContext`, { user });
-
-  const handleRemoveToken = () => {
-    localStorage.removeItem('token');
-  };
-
   const getUser = async () => {
     authApi
       .me()
@@ -58,7 +52,7 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const signOut = () => {
     // Remove token from localStorage
-    handleRemoveToken();
+    localStorage.removeItem('token');
     setUser(undefined);
     notification('success', 'Đăng xuất thành công');
     if (!location.pathname.includes('/login')) history.push('/login');

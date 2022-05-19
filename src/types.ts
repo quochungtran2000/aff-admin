@@ -31,7 +31,7 @@ export type SubCategory = {
 };
 
 export type Category = {
-  categoryId: string;
+  categoryId: number;
   title: string;
   slug: string | null;
   active: boolean;

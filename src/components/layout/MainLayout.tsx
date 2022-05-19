@@ -7,7 +7,6 @@ import {
 } from '@ant-design/icons';
 import { Button, Dropdown, Layout, Menu, Spin } from 'antd';
 import MenuItem from 'antd/lib/menu/MenuItem';
-import { DingtalkOutlined } from '@ant-design/icons';
 
 // import { avatar, logo } from 'assets/images';
 // import { useUser } from 'contexts/User';
@@ -52,11 +51,14 @@ const MainLayout = (props: IProps): JSX.Element => {
         {isError && error && notification('error', error)}
         <Layout className="min-h-screen">
           <Header className="bg-primary-40 h-12 flex items-center justify-between fixed z-10 w-full">
-            <DingtalkOutlined
+            {/* <DingtalkOutlined
               className="text-4xl text-white decoration-white"
               style={{ color: 'white' }}
               onClick={() => history.push('/')}
-            />
+            /> */}
+            <div className="text-2xl text-slate-200 ease-in duration-100 cursor-pointer hover:text-slate-50 tracking-wide ml-2 font-semibold" onClick={() => history.push('/')}>
+              SSG ADMIN
+            </div>
             {/* <img
               src={'https://png.pngtree.com/png-clipart/20201209/original/pngtree-apple-png-image_5628631.jpg'}
               alt="logo"

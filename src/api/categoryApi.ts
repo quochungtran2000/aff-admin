@@ -7,10 +7,19 @@ export type CrawlCategoryVars = {
   merchant?: 'tiki' | 'lazada' | 'shopee';
 };
 
-export type CategoryPayload = {
+export type CreateCategoryPayload = {
   title: string;
   mapCategory: string[];
 };
+
+export type UpdateCategoryPayload = {
+  categoryId: number;
+  active: boolean;
+  crawl: boolean;
+  website: boolean;
+  app: boolean;
+};
+
 const categoryApi = {
   getCrawlCategory: (params: CrawlCategoryVars): Promise<AxiosResponse<EcommerceCategory[]>> => {
     const url = `/admin/category/ecommerce`;
@@ -24,9 +33,17 @@ const categoryApi = {
     const url = `/admin/category`;
     return axiosClient.get(url);
   },
-  createCategory: (data: CategoryPayload): Promise<AxiosResponse<BaseResponse>> => {
+  createCategory: (data: CreateCategoryPayload): Promise<AxiosResponse<BaseResponse>> => {
     const url = `/admin/category`;
     return axiosClient.post(url, data);
+  },
+  updateCateory: (data: UpdateCategoryPayload): Promise<AxiosResponse<BaseResponse>> => {
+    const url = `/admin/category`;
+    return axiosClient.put(url, data);
+  },
+  deleteCategory: ({ categoryId }: { categoryId: number }): Promise<AxiosResponse<BaseResponse>> => {
+    const url = `/admin/category/${categoryId}`;
+    return axiosClient.delete(url);
   },
 };
 

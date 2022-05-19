@@ -9,6 +9,7 @@ import { CrawlProductPage } from '../pages/CrawlProduct';
 import { ComparePostPage } from '../pages/ComparePost';
 import { TopProductPostPage } from '../pages/TopProductPost';
 import { AffiliateLinkPage } from '../pages/AffiliateLink';
+import { CrawlPage } from '../pages/CrawlPage';
 // import { TikiCategoryPage } from '../pages/TikiCategory';
 
 export type CustomRoute = {
@@ -34,6 +35,7 @@ const routes: CustomRoute[] = [
   { path: '/compare-post', component: ComparePostPage, isPublic: false },
   { path: '/top-product-post', component: TopProductPostPage, isPublic: false },
   { path: '/aff-link', component: AffiliateLinkPage, isPublic: false },
+  { path: '/crawl', component: CrawlPage, isPublic: false },
 ];
 
 export default routes;
