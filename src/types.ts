@@ -20,3 +20,23 @@ export type EcommerceCategory = {
   crawl: boolean;
   subCategory?: EcommerceCategory[];
 };
+
+export type SubCategory = {
+  crawlCategoryId: string;
+  merchant: string;
+  title: string;
+  slug: string;
+  active: boolean;
+  crawl: boolean;
+};
+
+export type Category = {
+  categoryId: number;
+  title: string;
+  slug: string | null;
+  active: boolean;
+  crawl: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  childrens?: EcommerceCategory[];
+};

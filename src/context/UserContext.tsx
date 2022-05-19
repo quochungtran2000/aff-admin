@@ -6,6 +6,7 @@ import { authApi } from '../api';
 import { User } from '../types';
 import notification from '../utils/notification';
 import jwtDecode from 'jwt-decode';
+import { useHistory, useLocation } from 'react-router';
 
 type UserContextValues = {
   user?: User;
@@ -19,6 +20,8 @@ const UserContext = createContext<UserContextValues>(undefined as never);
 const useUser = (): UserContextValues => useContext(UserContext);
 
 const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
+  const location = useLocation();
+  const history = useHistory();
   const [user, setUser] = useState<User | undefined>(() => {
     const token = localStorage.getItem('token');
     if (!token) return undefined;
@@ -27,12 +30,6 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
     return decode;
   });
   const [isLoading, SetIsLoading] = useState<boolean>(false);
-
-  console.log(`userContext`, { user });
-
-  const handleRemoveToken = () => {
-    localStorage.removeItem('token');
-  };
 
   const getUser = async () => {
     authApi
@@ -55,7 +52,10 @@ const UserProvider = ({ children }: { children: ReactNode }): JSX.Element => {
 
   const signOut = () => {
     // Remove token from localStorage
-    handleRemoveToken();
+    localStorage.removeItem('token');
+    setUser(undefined);
+    notification('success', 'Đăng xuất thành công');
+    if (!location.pathname.includes('/login')) history.push('/login');
   };
 
   return (

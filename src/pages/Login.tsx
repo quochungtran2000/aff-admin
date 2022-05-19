@@ -4,7 +4,7 @@ import { authApi } from '../api';
 import { LoginVars } from '../api/authApi';
 import notification from '../utils/notification';
 // import useUserStore, { setUser } from '../store/user';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import { useUser } from '../context/UserContext';
 export default function LoginPage() {
   const [username, setUsername] = useState<string>('');
@@ -44,8 +44,9 @@ export default function LoginPage() {
       .login(data)
       .then(({ data }) => {
         const { token, user } = data;
-        localStorage.setItem('token', `Bearer ${token}`);
+        localStorage.setItem('token', token);
         setUser(user);
+        notification('success', `Xin chào ${user?.fullname}!.`);
       })
       .catch((err: any) => {
         console.log(err);

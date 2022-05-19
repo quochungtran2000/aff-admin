@@ -1,4 +1,11 @@
-import { LinkOutlined, ReadOutlined, UserOutlined, TagsOutlined, FileProtectOutlined } from '@ant-design/icons';
+import {
+  LinkOutlined,
+  ReadOutlined,
+  UserOutlined,
+  TagsOutlined,
+  FileProtectOutlined,
+  CloudDownloadOutlined,
+} from '@ant-design/icons';
 // const date = new Date().toLocaleDateString('fr-CA');
 
 const sidebarMenu = [
@@ -79,6 +86,11 @@ const sidebarMenu = [
     key: '/aff-link',
     title: 'Quản Lý Liên Kết',
     icon: LinkOutlined,
+  },
+  {
+    key: '/crawl',
+    title: 'Thu Thập Dữ Liệu',
+    icon: CloudDownloadOutlined,
   },
 ];
 
