@@ -1,26 +1,25 @@
-import HeaderShoppping from "./components/HeaderShopping"
-import MainLayout from '../../components/layout/MainLayout'
-import ProductShopping from "./components/ProductShopping"
-import ProductShoppingGrid from "./components/ProductShoppingGrid"
-import React from 'react'
+import HeaderShoppping from './components/HeaderShopping';
+import MainLayout from '../../components/layout/MainLayout';
+import ProductShopping from './components/ProductShopping';
+import ProductShoppingGrid from './components/ProductShoppingGrid';
 
 export default function Shopping() {
   return (
     <MainLayout>
-      <section className='px-20'>     
+      <section className="px-20">
         <article>
-          <HeaderShoppping/>
-        </article>   
-        <article>
-          <ProductShopping/>
+          <HeaderShoppping />
         </article>
         <article>
-          <ProductShopping/>
+          <ProductShopping />
         </article>
         <article>
-          <ProductShoppingGrid/>
+          <ProductShopping />
         </article>
-     </section>
-  </MainLayout>
-  )
+        <article>
+          <ProductShoppingGrid />
+        </article>
+      </section>
+    </MainLayout>
+  );
 }
