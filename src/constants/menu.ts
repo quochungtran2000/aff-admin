@@ -5,6 +5,7 @@ import {
   TagsOutlined,
   FileProtectOutlined,
   CloudDownloadOutlined,
+  MoneyCollectOutlined
 } from '@ant-design/icons';
 // const date = new Date().toLocaleDateString('fr-CA');
 
@@ -68,19 +69,19 @@ const sidebarMenu = [
     ],
   },
   {
-    key: '/post',
+    key: '/top-product-post',
     title: 'Quản Lý Bài Viết',
     icon: FileProtectOutlined,
-    submenu: [
-      {
-        title: 'Bài viết so sánh',
-        key: `/compare-post`,
-      },
-      {
-        title: 'Bài viết top sản phẩm',
-        key: '/top-product-post',
-      },
-    ],
+    // submenu: [
+    //   {
+    //     title: 'Bài viết so sánh',
+    //     key: `/compare-post`,
+    //   },
+    //   {
+    //     title: 'Bài viết top sản phẩm',
+    //     key: '/top-product-post',
+    //   },
+    // ],
   },
   {
     key: '/aff-link',
@@ -91,6 +92,11 @@ const sidebarMenu = [
     key: '/crawl',
     title: 'Thu Thập Dữ Liệu',
     icon: CloudDownloadOutlined,
+  },
+  {
+    key: '/crawl231',
+    title: 'Quản lý doanh thu',
+    icon: MoneyCollectOutlined,
   },
 ];
 

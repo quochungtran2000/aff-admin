@@ -30,6 +30,7 @@ interface IProps {
 const MainLayout = (props: IProps): JSX.Element => {
   const { children, isLoading = false, isError, error } = props;
   const { user, signOut } = useUser();
+  console.log({ user });
 
   const history = useHistory();
   const location = useLocation();
@@ -56,7 +57,10 @@ const MainLayout = (props: IProps): JSX.Element => {
               style={{ color: 'white' }}
               onClick={() => history.push('/')}
             /> */}
-            <div className="text-2xl text-slate-200 ease-in duration-100 cursor-pointer hover:text-slate-50 tracking-wide ml-2 font-semibold" onClick={() => history.push('/')}>
+            <div
+              className="text-2xl text-slate-200 ease-in duration-100 cursor-pointer hover:text-slate-50 tracking-wide ml-2 font-semibold"
+              onClick={() => history.push('/')}
+            >
               SSG ADMIN
             </div>
             {/* <img
