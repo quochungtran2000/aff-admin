@@ -23,7 +23,8 @@ export default function ProductTemplatePage() {
   const userParams: getProductVars = { page, pageSize, search };
   const params: Partial<getProductVars> = JSON.parse(JSON.stringify(userParams));
 
-  const { data, isLoading } = useQuery(['getProduct', params], () => productApi.getProduct(params));
+  const { data, isFetching } = useQuery(['getProduct', params], () => productApi.getProduct(params));
+  console.log({ isFetching });
   // const refetch = useCallback(async () => {
   //   try {
   //     setIsLoading(true);
@@ -59,7 +60,7 @@ export default function ProductTemplatePage() {
       </div>
 
       <TableProduct
-        isLoading={isLoading}
+        isLoading={isFetching}
         dataSource={data?.data?.data}
         total={data?.data?.total}
         page={page}

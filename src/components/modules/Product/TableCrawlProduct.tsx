@@ -21,7 +21,7 @@ export default function TableCrawlProduct(props: Props) {
   const history = useHistory();
   const columns = [
     {
-      title: 'productId',
+      title: 'Mã',
       dataIndex: 'productId',
       key: 'productId',
       width: '8%',
@@ -56,7 +56,7 @@ export default function TableCrawlProduct(props: Props) {
       dataIndex: 'lastestCrawlAt',
       key: 'lastestCrawlAt',
       width: '12%',
-      render: (date: Date) => <span>{new Date(date).toLocaleDateString()}</span>,
+      render: (date: Date) => !isLoading && <span>{new Date(date).toLocaleDateString()}</span>,
     },
     {
       title: 'Quản Lý',
@@ -64,15 +64,16 @@ export default function TableCrawlProduct(props: Props) {
       key: 'action',
       width: '15%',
       // align: 'center',
-      render: (_: any, record: Product) => (
-        <div className="flex justify-center">
-          <Button className="mr-4">Chỉnh Sửa</Button>
-          <Button type="primary" className="mr-4">
-            Quản lý liên kết
-          </Button>
-          <Button danger>Xóa</Button>
-        </div>
-      ),
+      render: (_: any, record: Product) =>
+        !isLoading && (
+          <div className="flex justify-center">
+            <Button className="mr-4">Chỉnh Sửa</Button>
+            <Button type="primary" className="mr-4">
+              Quản lý liên kết
+            </Button>
+            <Button danger>Xóa</Button>
+          </div>
+        ),
     },
   ];
   return (

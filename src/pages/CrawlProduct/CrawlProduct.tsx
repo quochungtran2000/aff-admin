@@ -24,7 +24,7 @@ export default function CrawlProductPage() {
   const userParams: getCrawlProductQuery = { page, pageSize, search };
   const params: Partial<getCrawlProductQuery> = JSON.parse(JSON.stringify(userParams));
 
-  const { data, isLoading } = useQuery(['getProduct', params], () => productApi.getCrawlProduct(params));
+  const { data, isFetching } = useQuery(['getProduct', params], () => productApi.getCrawlProduct(params));
   return (
     <MainLayout>
       <div className="pb-4">
@@ -46,7 +46,7 @@ export default function CrawlProductPage() {
       </div>
 
       <TableCrawlProduct
-        isLoading={isLoading}
+        isLoading={isFetching}
         dataSource={data?.data?.data}
         total={data?.data?.total}
         page={page}

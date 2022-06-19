@@ -10,6 +10,7 @@ import { ComparePostPage } from '../pages/ComparePost';
 import { TopProductPostPage } from '../pages/TopProductPost';
 import { AffiliateLinkPage } from '../pages/AffiliateLink';
 import { CrawlPage } from '../pages/CrawlPage';
+import { ConfigPage } from '../pages/ConfigPage';
 // import { TikiCategoryPage } from '../pages/TikiCategory';
 
 export type CustomRoute = {
@@ -27,6 +28,7 @@ const routes: CustomRoute[] = [
   { path: '/tiki-category', component: TikiCategoryPage, isPublic: false },
   { path: '/shopee-category', component: ShopeeCategoryPage, isPublic: false },
   { path: '/lazada-category', component: LazadaCategoryPage, isPublic: false },
+  { path: '/config', component: ConfigPage, isPublic: false },
   // Product
   { path: '/product-template', component: ProductTemplatePage, isPublic: false },
   { path: '/crawl-product', component: CrawlProductPage, isPublic: false },

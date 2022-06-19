@@ -5,7 +5,7 @@ import {
   TagsOutlined,
   FileProtectOutlined,
   CloudDownloadOutlined,
-  MoneyCollectOutlined
+  MoneyCollectOutlined,
 } from '@ant-design/icons';
 // const date = new Date().toLocaleDateString('fr-CA');
 
@@ -24,6 +24,11 @@ const sidebarMenu = [
         key: '/staff',
       },
     ],
+  },
+  {
+    key: '/config',
+    title: 'Cấu hình hệ thống',
+    icon: CloudDownloadOutlined,
   },
   {
     key: '/category',

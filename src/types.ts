@@ -103,3 +103,17 @@ export type PostAuthor = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CrawlHistory = {
+  crawlHistoryId: number;
+  status: 'pending' | 'crawling' | 'done';
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type AffConfig = {
+  name: string;
+  value: string;
+  createdAt: Date;
+  updatedAt: Date;
+};

@@ -17,11 +17,12 @@ type Props = {
 };
 
 export default function TableProduct(props: Props) {
-  const { isLoading, dataSource, onDelete, onUpdate, page, pageSize, total } = props;
+  const { isLoading, dataSource = [], onDelete, onUpdate, page, pageSize, total } = props;
   const history = useHistory();
+  console.log({ isLoading });
   const columns = [
     {
-      title: 'Id',
+      title: 'Mã',
       dataIndex: 'productTemplateId',
       key: 'productTemplateId',
       width: '8%',
@@ -37,28 +38,30 @@ export default function TableProduct(props: Props) {
       dataIndex: 'slug',
       key: 'slug',
       width: '8%',
-      render: (active: boolean) => <div className="flex justify-center">{active ? <CheckIcon /> : <CancelIcon />}</div>,
+      render: (active: boolean) =>
+        !isLoading && <div className="flex justify-center">{active ? <CheckIcon /> : <CancelIcon />}</div>,
     },
     {
-      title: 'Thumbnail',
+      title: 'Ảnh nền',
       dataIndex: 'thumbnail',
       key: 'thumbnail',
       width: '8%',
-      render: (active: boolean) => <div className="flex justify-center">{active ? <CheckIcon /> : <CancelIcon />}</div>,
+      render: (active: boolean) =>
+        !isLoading && <div className="flex justify-center">{active ? <CheckIcon /> : <CancelIcon />}</div>,
     },
     {
       title: 'Ngày tạ0',
       dataIndex: 'createdAt',
       key: 'createdAt',
       width: '8%',
-      render: (date: Date) => <span>{new Date(date).toLocaleDateString()}</span>,
+      render: (date: Date) => !isLoading && <span>{new Date(date).toLocaleDateString()}</span>,
     },
     {
       title: 'Ngày cập nhật',
       dataIndex: 'updatedAt',
       key: 'updatedAt',
       width: '10%',
-      render: (date: Date) => <span>{new Date(date).toLocaleDateString()}</span>,
+      render: (date: Date) => !isLoading && <span>{new Date(date).toLocaleDateString()}</span>,
     },
     {
       title: 'Quản Lý',
@@ -66,13 +69,14 @@ export default function TableProduct(props: Props) {
       key: 'action',
       width: '15%',
       // align: 'center',
-      render: (_: any, record: ProductTempalte) => (
-        <div className="flex justify-center">
-          <Button className="mr-4">Chỉnh Sửa</Button>
-          <Button className="mr-4">Thêm sản phẩm</Button>
-          <Button danger>Xóa</Button>
-        </div>
-      ),
+      render: (_: any, record: ProductTempalte) =>
+        !isLoading && (
+          <div className="flex justify-center">
+            <Button className="mr-4">Chỉnh Sửa</Button>
+            <Button className="mr-4">Thêm sản phẩm</Button>
+            <Button danger>Xóa</Button>
+          </div>
+        ),
     },
   ];
   return (
