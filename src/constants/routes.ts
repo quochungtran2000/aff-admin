@@ -9,7 +9,7 @@ import { CrawlProductPage } from '../pages/CrawlProduct';
 import { ComparePostPage } from '../pages/ComparePost';
 import { TopProductPostPage } from '../pages/TopProductPost';
 import { AffiliateLinkPage } from '../pages/AffiliateLink';
-import { CrawlPage } from '../pages/CrawlPage';
+import { CrawlDetailPage, CrawlPage } from '../pages/CrawlPage';
 import { ConfigPage } from '../pages/ConfigPage';
 // import { TikiCategoryPage } from '../pages/TikiCategory';
 
@@ -38,6 +38,7 @@ const routes: CustomRoute[] = [
   { path: '/top-product-post', component: TopProductPostPage, isPublic: false },
   { path: '/aff-link', component: AffiliateLinkPage, isPublic: false },
   { path: '/crawl', component: CrawlPage, isPublic: false },
+  { path: '/crawl/:id', component: CrawlDetailPage, isPublic: false },
 ];
 
 export default routes;

@@ -117,3 +117,48 @@ export type AffConfig = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Product_Affiliate_Link = {
+  productAffiliateLinkId: string;
+  campaignId: string;
+  clickUrl: string;
+  merchantId: string;
+  originUrl: string;
+  publisherId: string;
+  shortUrl: string;
+  utmCampaign: string;
+  utmContent: string;
+  utmMedium: string;
+  utmSource: string;
+  utmTerm: string;
+  createdAt: Date;
+  updatedAt: Date;
+  productId: string;
+};
+
+export type CrawlProductHistory = {
+  crawlHistoryId: number;
+  productId: string;
+  status: 'pending' | 'crawling' | 'done';
+  createdAt: Date;
+  updatedAt: Date;
+  product: CrawlProduct;
+};
+
+export type CrawlProduct = {
+  productId: string;
+  name: string;
+  slug: string;
+  originalUrl: string;
+  thumbnail: string;
+  isCompleteCrawl: boolean;
+  isCompleteUpdate: boolean;
+  average: number;
+  sold: number;
+  description: string;
+  merchant: 'tiki' | 'lazada' | 'shopee';
+  crawlCategoryId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  lastestCrawlAt: Date;
+};

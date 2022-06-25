@@ -19,7 +19,7 @@ export default function CreateConfigModal(props: IProps): JSX.Element {
 
   useEffect(() => {
     form.resetFields();
-  }, [form]);
+  });
 
   return (
     <Modal title="Tạo cấu hình" visible={isModalVisible} onCancel={onCancel} footer={null}>

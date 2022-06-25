@@ -1,28 +1,35 @@
 import { Button, Form, Input, Steps, Table } from 'antd';
-import {
-  CheckSquareOutlined,
-  AndroidOutlined,
-  FileDoneOutlined,
-  AccountBookOutlined,
-  CloudDownloadOutlined,
-  LoadingOutlined,
-} from '@ant-design/icons';
+import { AndroidOutlined, FileDoneOutlined, CloudDownloadOutlined, LoadingOutlined } from '@ant-design/icons';
 import MainLayout from '../../components/layout/MainLayout';
 import { MagifyingGlassIcon } from '../../assets/svg';
 import { useMutation, useQuery } from 'react-query';
-import crawlApi from '../../api/crawlApi';
-import { CrawlHistory } from '../../types';
+import crawlApi, { getCrawlProductHistoryVars } from '../../api/crawlApi';
+import { CrawlProductHistory } from '../../types';
 import notification from '../../utils/notification';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import useQueryParam from '../../hook/useQueryPrams';
+import { HocChangePagination } from '../../utils/HocChangePagination';
+import { PageSize } from '../../constants/configVariables';
 
 const { Step } = Steps;
 
-export default function CrawlPage() {
-  const { data, isLoading, refetch } = useQuery(['getCrawlHistory'], () => crawlApi.getCrawlHistory(), {
+export default function CrawlDetailPage() {
+  let { id }: any = useParams();
+  const queryParam = useQueryParam();
+  const history = useHistory();
+
+  const page = Number(queryParam.get('page') + '') || 1;
+  const pageSize = Number(queryParam.get('pageSize') + '') || 10;
+
+  const userParams: getCrawlProductHistoryVars = { page, pageSize, id: Number(id + '') };
+  const params: Partial<getCrawlProductHistoryVars> = JSON.parse(JSON.stringify(userParams));
+
+  const { data, isLoading, refetch } = useQuery(['getCrawlHistory', params], () => crawlApi.getCrawlProduct(params), {
     refetchInterval: 5000,
+    enabled: !!params.id,
   });
 
-  const history = useHistory();
+  console.log(data);
 
   const { mutate: createCrawlHistory } = useMutation(crawlApi.createCrawlHistory, {
     onSuccess: ({ data }) => {
@@ -57,38 +64,23 @@ export default function CrawlPage() {
 
   const columns = [
     {
-      title: 'Yêu cầu số',
-      dataIndex: 'crawlHistoryId',
-      key: 'crawlHistoryId',
-      width: '20%',
-      render: (_: any, record: CrawlHistory) => <span>{`Yêu cầu số: ${record.crawlHistoryId}`}</span>,
+      title: 'Tên sản phẩm',
+      dataIndex: 'productId',
+      key: 'productId',
+      columnWidth: '60%',
+      render: (_: any, record: CrawlProductHistory) => <span>{record.product.name}</span>,
     },
     {
-      title: 'Quy trình',
-      dataIndex: 'crawlHistoryId',
-      key: 'crawlHistoryId',
-      width: '40%',
-      render: (_: any, record: CrawlHistory) => (
-        <Steps>
-          {/* <Step status="finish" title={`Yêu cầu số: ${record.crawlHistoryId}`} icon={<AccountBookOutlined />} /> */}
-          <Step status="finish" title="Xác nhận" icon={<CheckSquareOutlined />} />
+      title: 'Quá trình',
+      dataIndex: 'productId',
+      key: 'productId',
+      columnWidth: '40%',
+      render: (_: any, record: CrawlProductHistory) => (
+        <Steps className="w-fit">
+          {/* <Step status="finish" title={`${record.product.name}`} icon={<AccountBookOutlined />} /> */}
           {renderStep(record?.status)}
         </Steps>
       ),
-    },
-    {
-      title: 'Ngày tạo',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      width: '10%',
-      render: (date: Date) => <span>{new Date(date).toLocaleDateString()}</span>,
-    },
-    {
-      title: 'ngày cập nhật',
-      dataIndex: 'updatedAt',
-      key: 'updatedAt',
-      width: '10%',
-      render: (date: Date) => <span>{new Date(date).toLocaleDateString()}</span>,
     },
   ];
   return (
@@ -119,16 +111,13 @@ export default function CrawlPage() {
         rowKey={(record) => record.crawlHistoryId}
         columns={columns}
         dataSource={data?.data?.data}
-        onRow={(record, rowIndex) => {
-          return {
-            onClick: () => {
-              history.push(`/crawl/${record.crawlHistoryId}`);
-            }, // click row
-            // onDoubleClick: (event) => {}, // double click row
-            // onContextMenu: (event) => {}, // right button click row
-            // onMouseEnter: (event) => {}, // mouse enter row
-            // onMouseLeave: (event) => {}, // mouse leave row
-          };
+        pagination={{
+          total: data?.data.total,
+          defaultCurrent: page,
+          defaultPageSize: pageSize,
+          showSizeChanger: true,
+          pageSizeOptions: [PageSize[10], PageSize[20], PageSize[50]],
+          onChange: HocChangePagination(history),
         }}
       />
     </MainLayout>

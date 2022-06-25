@@ -97,7 +97,7 @@ export default function ConfigPage() {
   return (
     <MainLayout>
       <div className="flex justify-between">
-        <h6 className="text-primary-30 mt-1 font-semibold text-xl">{`Danh mục sản phẩm`}</h6>
+        <h6 className="text-primary-30 mt-1 font-semibold text-xl">{`Danh sách cấu hình`}</h6>
         <Tooltip title="search">
           <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={() => setIsCreateVisible(true)} />
         </Tooltip>
